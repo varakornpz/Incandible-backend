@@ -102,7 +102,7 @@ func GoogleAuthCallBack(c fiber.Ctx) error{
 			SameSite: 	"Lax",
 			Path:     	"/",
 		})
-	return c.Redirect().Status(fiber.StatusTemporaryRedirect).To("https://incanedible.varakorn.net/dashboard")
+	return c.Redirect().Status(fiber.StatusTemporaryRedirect).To(providers.AppConf.GGAfterSigninRedirect)
 }
 
 func GoogleAuthSignin(c fiber.Ctx) error{

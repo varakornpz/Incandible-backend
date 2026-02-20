@@ -14,6 +14,7 @@ type Config struct {
 	GGClientSecret	string	`validate:"required"`
 	GGClientID		string	`validate:"required"`
 	GGRedirectUrl	string	`validate:"required"`
+	GGAfterSigninRedirect	string	`validate:"required"`
 	FrontendErrPage		string	`validate:"required"`
 }
 
@@ -31,7 +32,9 @@ func InitAppConf(){
 		GGClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
 		GGClientID: os.Getenv("GOOGLE_CLIENT_ID"),
 		GGRedirectUrl: os.Getenv("GOOGLE_REDIRECT_URL"),
+		GGAfterSigninRedirect: os.Getenv("GOOGLE_AFTER_SIGNIN_REDIRECT"),
 		FrontendErrPage: os.Getenv("FE_ERROR_PAGE"),
+		
 	}
 
 	v := reflect.ValueOf(*AppConf)
