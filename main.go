@@ -45,7 +45,9 @@ func main(){
 	}))
 
 	mainAppRoute.Get("/hi" , func (c fiber.Ctx) error  {
-		return c.SendString("You are wowza")
+		return c.JSON(fiber.Map{
+			"msg" : "hi" ,
+		})
 	})
 
 
