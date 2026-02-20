@@ -15,6 +15,8 @@ FROM alpine:latest
 #for communicate with external api that require cer
 RUN apk --no-cache add ca-certificates
 
+RUN apt-get update && apt-get install -y tzdata
+
 WORKDIR /root/
 
 COPY --from=builder /app/fiber-app .
