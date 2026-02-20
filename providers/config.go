@@ -21,9 +21,9 @@ var AppConf	*Config
 
 func InitAppConf(){
 	dotEnvErr := godotenv.Load()
-	if dotEnvErr != nil {
-		log.Fatal().Msg("Cant load .env called by providers/config.go")
-	}
+    if dotEnvErr != nil {
+		log.Info().Msg("No .env file found, using system environment variables")
+    }
 
 	AppConf = &Config{
 		JWTSecret: os.Getenv("JWT_SECRET"),
