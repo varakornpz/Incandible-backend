@@ -35,4 +35,4 @@ jobs :
           script: |
             cd /home/varakorn/incanedible
             docker compose pull
-            docker compose --env-file .env.prod up -d
+            docker compose up -d
