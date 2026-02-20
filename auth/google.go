@@ -4,8 +4,8 @@ import (
 	"context"
 	"encoding/json"
 	"io"
-	"os"
 	"net/http"
+	"os"
 	"time"
 
 	"github.com/gofiber/fiber/v3"
@@ -30,18 +30,6 @@ func InitGoogleAuthConf(){
 		ClientID	string
 		ClientSecret	string
 	}
-	// myConfig := MyOAuthConfig{
-	// 	RedirectURL: os.Getenv("GOOGLE_REDIRECT_URL"),
-	// 	ClientID: os.Getenv("GOOGLE_CLIENT_ID"),
-	// 	ClientSecret: os.Getenv("GOOGLE_CLIENT_SECRET"),
-	// }
-	// v := reflect.ValueOf(myConfig)
-	// t := v.Type()
-	// for i := 0 ; i < v.NumField() ; i++ {
-	// 	if v.Field(i).Interface() == "" {
-	// 		log.Fatal().Msg("Missing " + t.Field(i).Name  + " called by google.go")
-	// 	}
-	// }
 	googleOauthConfig = &oauth2.Config{
 		RedirectURL:  providers.AppConf.GGRedirectUrl,
 		ClientID:     providers.AppConf.GGClientID,
@@ -114,10 +102,13 @@ func GoogleAuthCallBack(c fiber.Ctx) error{
 			SameSite: 	"Lax",
 			Path:     	"/",
 		})
-	return c.Redirect().Status(fiber.StatusTemporaryRedirect).To("http://localhost:3000/wowza")
+	return c.Redirect().Status(fiber.StatusTemporaryRedirect).To("https://incanedible.varakorn.net/dashboard")
 }
 
 func GoogleAuthSignin(c fiber.Ctx) error{
+	// if c.Cookies("access_token") != ""{
+	// 	claims ,err := utils.Ver
+	// }
 	oAuthState := genCSRFToken(c)
 
 	url := googleOauthConfig.AuthCodeURL(oAuthState)
