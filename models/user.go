@@ -15,6 +15,7 @@ type User struct{
     DeletedAt      gorm.DeletedAt `gorm:"index"`
     UUID            uuid.UUID `gorm:"type:uuid;primaryKey;default:gen_random_uuid()"` 
     Email          string
-    ProfilePic     string
+    Name            string
+    ProfilePic     string   `gorm:"type:text"`
     RegisteredCand pq.StringArray `gorm:"type:text[]"`
 }

@@ -73,11 +73,21 @@ func GoogleAuthCallBack(c fiber.Ctx) error{
 	// email := userInfo["email"].(string)
 	// name := userInfo["name"].(string)
 	email := userInfo["email"].(string)
+	name  := userInfo["name"].(string)
+
+	var profileImage string
+    if pic, ok := userInfo["picture"].(string); ok {
+        profileImage = pic
+    } else {
+        profileImage = "https://your-domain.com/default-avatar.png" 
+    }
 
 	var currentUser models.User
 	user , getUserErr := gorm.GetUserByEmail(email)
 	if getUserErr != nil {
 		currentUser.Email = email
+		currentUser.Name  = name
+		currentUser.ProfilePic = profileImage
 		gorm.PutNewUser(&currentUser)
 	}else{
 		currentUser = user

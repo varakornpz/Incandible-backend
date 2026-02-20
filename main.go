@@ -10,6 +10,7 @@ import (
 	"github.com/rs/zerolog/log"
 	"github.com/varakornpz/auth"
 	"github.com/varakornpz/gorm"
+	"github.com/varakornpz/myapp"
 	"github.com/varakornpz/providers"
 	// "github.com/golang-jwt/jwt/v5"
 )
@@ -36,7 +37,6 @@ func main(){
 	mainAppRoute := app.Group("/app")
 	mainAppRoute.Use(jwtware.New(jwtware.Config{
 		SigningKey: jwtware.SigningKey{Key: []byte(providers.AppConf.JWTSecret)},
-
 		Extractor : extractors.FromCookie("access_token") ,
 
 		ErrorHandler: func (c fiber.Ctx , err error) error {
@@ -49,6 +49,8 @@ func main(){
 			"msg" : "hi" ,
 		})
 	})
+
+	mainAppRoute.Get("/me" , myapp.GetUserData)
 
 
 	gorm.InitDB()
