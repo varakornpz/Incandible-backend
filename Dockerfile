@@ -15,7 +15,7 @@ FROM alpine:latest
 #for communicate with external api that require cer
 RUN apk --no-cache add ca-certificates
 
-RUN apt-get update && apt-get install -y tzdata
+RUN apk add --no-cache tzdata
 
 WORKDIR /root/
 
