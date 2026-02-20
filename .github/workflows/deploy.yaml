@@ -34,5 +34,5 @@ jobs :
           key: ${{ secrets.SSH_PRIVATE_KEY }}
           script: |
             cd /home/varakorn/incanedible
-            docker-compose pull
-            docker-compose --env-file .env.production up -d
+            docker compose pull
+            docker compose --env-file .env.prod up -d
