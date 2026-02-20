@@ -1,4 +1,4 @@
-name: Deply to sea-otter via tailscale
+name: Deply to lab1 via tailscale
 
 on:
   push:
@@ -19,13 +19,13 @@ jobs :
           tags: tag:ci
       - name: setting for get local repo
         run: |
-          echo '{"insecure-registries": ["${{ secrets.SERVER_IP }}:5000"]}' | sudo tee /etc/docker/daemon.json
+          echo '{"insecure-registries": ["${{ secrets.REGISTRY_IP }}:5000"]}' | sudo tee /etc/docker/daemon.json
           sudo systemctl restart docker
 
       - name: build and push to local repo
         run: |
-          docker build -t ${{ secrets.SERVER_IP }}:5000/incanedible-be:latest .
-          docker push ${{ secrets.SERVER_IP }}:5000/incanedible-be:latest
+          docker build -t ${{ secrets.REGISTRY_IP }}:5000/incanedible-be:latest .
+          docker push ${{ secrets.REGISTRY_IP }}:5000/incanedible-be:latest
       - name: ssh to run docker file
         uses: appleboy/ssh-action@v1.0.3
         with:
