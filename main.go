@@ -36,7 +36,9 @@ func main(){
 	mainAppRoute := app.Group("/app")
 	mainAppRoute.Use(jwtware.New(jwtware.Config{
 		SigningKey: jwtware.SigningKey{Key: []byte(providers.AppConf.JWTSecret)},
-		Extractor:  extractors.FromAuthHeader("Bearer"),
+
+		Extractor : extractors.FromCookie("access_tken") ,
+		
 		ErrorHandler: func (c fiber.Ctx , err error) error {
 			return c.SendStatus(fiber.ErrUnauthorized.Code)
 		},
