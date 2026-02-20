@@ -16,7 +16,7 @@ jobs :
         with:
           oauth-client-id: ${{ secrets.TS_OAUTH_CLIENT_ID }}
           oauth-secret: ${{ secrets.TS_OAUTH_SECRET }}
-          tags: tag:ci
+          tags: tag:ci 
       - name: setting for get local repo
         run: |
           echo '{"insecure-registries": ["${{ secrets.REGISTRY_IP }}:5000"]}' | sudo tee /etc/docker/daemon.json
@@ -35,4 +35,4 @@ jobs :
           script: |
             cd /home/varakorn/incanedible
             docker-compose pull
-            docker-compose up -d
+            docker-compose --env-file .env.production up -d
