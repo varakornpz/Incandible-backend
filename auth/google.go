@@ -108,9 +108,10 @@ func GoogleAuthCallBack(c fiber.Ctx) error{
 			//Pretend frontend to edit cookie
 			HTTPOnly: 	true,
 			//***In prod change to true***
-			Secure:  	 false,
+			Secure:  	 true,
 			SameSite: 	"Lax",
 			Path:     	"/",
+			Domain: ".varakorn.net",
 		})
 	return c.Redirect().Status(fiber.StatusTemporaryRedirect).To(providers.AppConf.GGAfterSigninRedirect)
 }
